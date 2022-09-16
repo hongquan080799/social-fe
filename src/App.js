@@ -1,23 +1,31 @@
-import logo from './logo.svg';
 import './App.css';
-
+import Navbar from './components/Navbar'
+import LeftSideBar from './components/LeftSideBar'
+import Storys from './components/Storys'
+import UpPost from './components/UpPost'
+import RightSideBar from './components/RightSideBar';
+import Posts from './components/Posts'
+import Login from './components/login/Login';
 function App() {
+  const checkLogin = () => {
+    return localStorage.getItem('jwt')
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {checkLogin() != null ?
+      <div>
+        <Navbar />
+        <div className='body-social'>
+            <LeftSideBar />
+            <div className='news'>
+                <Storys />
+                <UpPost />
+                <Posts />
+            </div>
+            <RightSideBar />
+        </div>
+      </div> : <Login />
+    }
     </div>
   );
 }
